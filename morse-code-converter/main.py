@@ -13,5 +13,5 @@ def converter(phrase):
 
 
 while True:
-    input_phrase = input("Please enter the phrase you wish to convert: ")
+    input_phrase = input("Please enter the signal: ")
     print(converter(input_phrase))
