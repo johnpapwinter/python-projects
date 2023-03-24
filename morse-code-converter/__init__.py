@@ -1,4 +1,4 @@
-from data import CONVERSION_TABLE
+from morse import CONVERSION_TABLE
 
 
 def converter(phrase):
