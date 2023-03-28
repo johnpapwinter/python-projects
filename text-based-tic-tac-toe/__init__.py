@@ -49,10 +49,6 @@ def check_empty_place(x1, y1):
 player1 = True
 turn = 1
 board = initialize_board()
-# board[0][0] = "A"
-# board[0][2] = "B"
-# board[2][2] = "C"
-# board[2][0] = "D"
 
 
 while True:
