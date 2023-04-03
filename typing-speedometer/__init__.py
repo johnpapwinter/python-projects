@@ -1,4 +1,4 @@
-from ui import TypoSpeedometerUI
+from typometer_ui import TypoSpeedometerUI
 
 
 if __name__ == "__main__":
