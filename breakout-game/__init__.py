@@ -4,15 +4,23 @@ from ball import Ball
 import time
 
 PLAYER_LIVES = 3
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+LEFT_WALL = (-SCREEN_WIDTH / 2) + 20
+RIGHT_WALL = (SCREEN_WIDTH / 2) - 20
+CEILING = (SCREEN_HEIGHT / 2) - 20
+BOTTOM = -SCREEN_HEIGHT / 2
+PADDLE_POSITION = (0, BOTTOM + 20)
+
 
 screen = Screen()
 screen.bgcolor("black")
-screen.setup(width=800, height=600)
+screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 screen._root.resizable(False, False)
 screen.title("BREAKOUT GAME")
 screen.tracer(0)
 
-player_paddle = Paddle((0, -280))
+player_paddle = Paddle(PADDLE_POSITION)
 ball = Ball()
 
 screen.listen()
@@ -26,16 +34,16 @@ while game_in_on:
 
     ball.move()
 
-    if ball.xcor() > 380 or ball.xcor() < -380:
+    if ball.xcor() > RIGHT_WALL or ball.xcor() < LEFT_WALL:
         ball.bounce_x()
 
-    if ball.ycor() > 280:
+    if ball.ycor() > CEILING:
         ball.bounce_y()
 
     if ball.distance(player_paddle) < 25:
         ball.bounce_y()
 
-    if ball.ycor() < -300:
+    if ball.ycor() < BOTTOM:
         PLAYER_LIVES -= 1
         ball.reset_pos()
 
