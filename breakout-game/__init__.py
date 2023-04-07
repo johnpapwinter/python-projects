@@ -20,7 +20,7 @@ screen._root.resizable(False, False)
 screen.title("BREAKOUT GAME")
 screen.tracer(0)
 
-player_paddle = Paddle(PADDLE_POSITION)
+player_paddle = Paddle(PADDLE_POSITION, LEFT_WALL, RIGHT_WALL)
 ball = Ball()
 
 screen.listen()
