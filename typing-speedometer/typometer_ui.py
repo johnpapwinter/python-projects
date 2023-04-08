@@ -15,6 +15,7 @@ class TypoSpeedometerUI(tk.CTk):
         tk.CTk.__init__(self)
         self.title("Typing Speedometer")
         self.geometry("500x450")
+        self.resizable(False, False)
 
         self.label = tk.CTkLabel(self, text="Typing Speedometer", font=FONT_TITLE)
         self.label.pack(padx=35, pady=15)
