@@ -6,8 +6,8 @@ import time
 PLAYER_LIVES = 3
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-LEFT_WALL = (-SCREEN_WIDTH / 2) + 20
-RIGHT_WALL = (SCREEN_WIDTH / 2) - 20
+LEFT_WALL = (-SCREEN_WIDTH / 2) + 30
+RIGHT_WALL = (SCREEN_WIDTH / 2) - 30
 CEILING = (SCREEN_HEIGHT / 2) - 20
 BOTTOM = -SCREEN_HEIGHT / 2
 PADDLE_POSITION = (0, BOTTOM + 20)
@@ -20,7 +20,7 @@ screen._root.resizable(False, False)
 screen.title("BREAKOUT GAME")
 screen.tracer(0)
 
-player_paddle = Paddle(PADDLE_POSITION, LEFT_WALL, RIGHT_WALL)
+player_paddle = Paddle(PADDLE_POSITION, LEFT_WALL + 20, RIGHT_WALL - 20)
 ball = Ball()
 
 screen.listen()
