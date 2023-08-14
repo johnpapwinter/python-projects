@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="content is-medium">
+        <a class="button is-primary is-medium is-rounded is-pulled-right" href="{{ url_for('add') }}">Add Task</a>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Date</th>
+                    <th>Completed</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>B</td>
+                    <td>C</td>
+                    <td>D</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

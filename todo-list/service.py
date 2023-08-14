@@ -1,9 +1,10 @@
+from typing import List
 from db import db
 from model import ItemModel
 from datetime import date
 
 
-def add_item(item_data):
+def add_item(item_data) -> int or str:
     item = ItemModel(**item_data)
     item.date = date.fromisoformat(date.today().isoformat())
 
@@ -14,16 +15,16 @@ def add_item(item_data):
         db.session.rollback()
         return 500, str(e)
 
-    return {"id": item.id}
+    return item.id
 
 
-def get_all_items():
+def get_all_items() -> List[ItemModel]:
     items = ItemModel.query.order_by(ItemModel.date.desc()).all()
 
     return items
 
 
-def change_item_status(item_id: int, new_status: bool):
+def change_item_status(item_id: int, new_status: bool) -> int or str:
     item = ItemModel.query.get_or_404(item_id)
     item.completed = new_status
 
@@ -33,10 +34,10 @@ def change_item_status(item_id: int, new_status: bool):
         db.session.rollback()
         return 500, str(e)
 
-    return {"updated": item.id}
+    return item.id
 
 
-def delete_item(item_id: int):
+def delete_item(item_id: int) -> int or str:
     item = ItemModel.query.get_or_404(item_id)
 
     try:
@@ -46,5 +47,5 @@ def delete_item(item_id: int):
         db.session.rollback()
         return 500, str(e)
 
-    return {"deleted": item.id}
+    return item.id
 
