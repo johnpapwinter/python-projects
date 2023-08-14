@@ -33,7 +33,7 @@ def get_all_cafes(page: int, per_page: int) -> PageCafeSchema:
     cafes = CafeModel.query.order_by(CafeModel.id).paginate(page=page, per_page=per_page)
 
     cafe_schema = CafeSchema()
-    serialized_items =[cafe_schema.dump(cafe) for cafe in cafes.items]
+    serialized_items = [cafe_schema.dump(cafe) for cafe in cafes.items]
     result = {
         "page": cafes.page,
         "per_page": cafes.per_page,
