@@ -18,7 +18,9 @@ def add_item(item_data):
 
 
 def get_all_items():
-    items = ItemModel.query.order_by(ItemModel.id)
+    items = ItemModel.query.order_by(ItemModel.date.desc()).all()
+
+    return items
 
 
 def change_item_status(item_id: int, new_status: bool):
