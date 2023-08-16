@@ -9,17 +9,27 @@
                 <tr>
                     <th>Task</th>
                     <th>Date</th>
-                    <th>Completed</th>
+                    <th>Status</th>
                     <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
+                {% for item in items %}
                 <tr>
-                    <td>A</td>
-                    <td>B</td>
-                    <td>C</td>
-                    <td>D</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        {% if item.completed %}
+                            <a class="button is-success is-rounded is-small" href="{{ url_for('change_status', item_id=item.id) }}">Done</a>
+                        {% else %}
+                            <a class="button is-warning is-rounded is-small" href="{{ url_for('change_status', item_id=item.id) }}">Pending</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="button is-danger is-small is-rounded" href="{{ url_for('remove', item_id=item.id) }}">Remove</a>
+                    </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
