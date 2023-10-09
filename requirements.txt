@@ -1,0 +1,9 @@
+Scrapy~=2.11.0
+itemadapter~=0.8.0
+Flask~=2.2.3
+marshmallow~=3.19.0
+python-dotenv~=1.0.0
+watchdog~=3.0.0
+customtkinter~=5.1.2
+Pillow~=9.4.0
+CTkMessagebox~=1.6
