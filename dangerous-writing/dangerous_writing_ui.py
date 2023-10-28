@@ -43,18 +43,21 @@ class DangerousWriting(tk.CTk):
         self.title('Dangerous Writing')
         self.bind('<Control-s>', self.save_text)
 
-        self.label = tk.CTkLabel(self, text='Press start and begin writing!', font=FONT_TITLE)
+        self.frame = tk.CTkFrame(self)
+        self.frame.pack(padx=20, pady=20, fill='both', expand=True)
+
+        self.label = tk.CTkLabel(self.frame, text='Press start and begin writing!', font=FONT_TITLE)
         self.label.pack(padx=10, pady=12)
 
-        self.textbox = tk.CTkTextbox(self, width=450, height=450, font=FONT_REGULAR,
+        self.textbox = tk.CTkTextbox(self.frame, width=450, height=450, font=FONT_REGULAR,
                                   wrap='word', state=tk.DISABLED)
         self.textbox.pack(padx=10, pady=20)
         self.textbox.bind('<Key>', command=self.start)
 
-        self.start_button = tk.CTkButton(self, text='Start', font=FONT_REGULAR,
+        self.start_button = tk.CTkButton(self.frame, text='Start', font=FONT_REGULAR,
                                          command=lambda: self.count_down(10))
         self.start_button.pack(padx=5, side=tk.LEFT, anchor='e', expand=True)
-        self.save_button = tk.CTkButton(self, text='Save', font=FONT_REGULAR,
-                                        command=self.save_text)
+        self.save_button = tk.CTkButton(self.frame, text='Save', font=FONT_REGULAR,
+                                        fg_color='green', hover_color='green', command=self.save_text)
         self.save_button.pack(padx=5, side=tk.RIGHT, anchor='w', expand=True)
 
