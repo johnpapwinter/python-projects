@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content is-medium">
+        <form action="{{ url_for('get_characters') }}" method="GET" class="my-3 has-text-centered">
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    <label for="name">Name:</label>
+                    <input id="name" class="input" type="text" placeholder="Name" name="name" value="{{ request.args.get('name', '') }}">
+                </div>
+                <div class="control">
+                    <label for="gender">Gender:</label>
+                    <input id="gender" class="input" type="text" placeholder="Gender" name="gender" value="{{ request.args.get('gender', '') }}">
+                </div>
+                <div class="control">
+                    <label for="race">Race:</label>
+                    <input id="race" class="input" type="text" placeholder="Race" name="race" value="{{ request.args.get('race', '') }}">
+                </div>
+                <div class="control">
+                    <label for="realm">Realm:</label>
+                    <input id="realm" class="input" type="text" placeholder="Realm" name="realm" value="{{ request.args.get('realm', '') }}">
+                </div>
+            </div>
+            <div class="has-text-centered">
+                <button class="button is-info" type="submit" onclick="clearForm()">Search</button>
+                <button class="button is-warning" type="button" onclick="clearForm()">Clear</button>
+            </div>
+        </form>
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Race</th>
+                    <th>Realm</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for character in data['docs'] %}
+                <tr>
+                    <td>{{ character.name }}</td>
+                    <td>{{ character.gender }}</td>
+                    <td>{{ character.race }}</td>
+                    <td>
+                        {% if character.realm %}
+                            {{ character.realm }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav class="pagination is-centered" role="pagination">
+            <a class="pagination-previous" {% if data['page'] == 1 %}disabled{% endif %}
+                href="{{ url_for('get_characters', page=data['page'] - 1) }}>
+                Previous
+            </a>
+            <a class="pagination-next" {% if data['page'] == data['pages'] %}disabled{% endif %}
+                href="{{ url_for('get_characters', page=data['page'] + 1) }}>
+                Next
+            </a>
+            <ul class="pagination-list">
+                {% set show_ellipsis_start = data['page'] > 4 %}
+                {% set show_ellipsis_end = data['page'] < data['pages'] - 3 %}
+
+                {% for page_num in range(1, data['pages'] + 1) %}
+                    {% if show_ellipsis_start and page_num == 2 %}
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% elif show_ellipsis_end and page_num == data['pages'] - 1 %}
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% elif not (show_ellipsis_start and page_num < data['page'] - 2 or
+                                 show_ellipsis_end and page_num > data['page'] + 2) %}
+                        <li>
+                            <a class="pagination-link {% if page_num == data['page'] %}is-current{% endif %}"
+                               href="{{ url_for('get_characters', page=page_num) }}">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

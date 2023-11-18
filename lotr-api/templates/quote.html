@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content is-medium">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Quote</th>
+                    <th>Character</th>
+                    <th>Movie</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quote in data['docs'] %}
+                <tr>
+                    <td>{{ quote.dialog }}</td>
+                    <td>{{ quote.character }}</td>
+                    <td>{{ quote.movie }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <nav class="pagination is-centered" role="pagination">
+            <a class="pagination-previous" {% if data['page'] == 1 %}disabled{% endif %}
+                href="{{ url_for('get_characters', page=data['page'] - 1) }}>
+                Previous
+            </a>
+            <a class="pagination-next" {% if data['page'] == data['pages'] %}disabled{% endif %}
+                href="{{ url_for('get_characters', page=data['page'] + 1) }}>
+                Next
+            </a>
+            <ul class="pagination-list">
+                {% set show_ellipsis_start = data['page'] > 4 %}
+                {% set show_ellipsis_end = data['page'] < data['pages'] - 3 %}
+
+                {% for page_num in range(1, data['pages'] + 1) %}
+                    {% if show_ellipsis_start and page_num == 2 %}
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% elif show_ellipsis_end and page_num == data['pages'] - 1 %}
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    {% elif not (show_ellipsis_start and page_num < data['page'] - 2 or
+                                 show_ellipsis_end and page_num > data['page'] + 2) %}
+                        <li>
+                            <a class="pagination-link {% if page_num == data['page'] %}is-current{% endif %}"
+                               href="{{ url_for('get_characters', page=page_num) }}">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
