@@ -7,3 +7,7 @@ watchdog~=3.0.0
 customtkinter~=5.1.2
 Pillow~=9.4.0
 CTkMessagebox~=1.6
+pandas~=2.1.3
+jupyter
+seaborn~=0.13.0
+plotly~=5.18.0
