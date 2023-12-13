@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PDF to Audiobook Converter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="tabs is-centered is-large is-toggle is-toggle-rounded my-3">
+        <ul>
+            <li>
+                <a class="navbar-item" href="{{ url_for('home') }}">
+                    PDF TO AUDIOBOOK CONVERTER
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="container my-6">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>
